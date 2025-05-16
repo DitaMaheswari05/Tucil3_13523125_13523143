@@ -1,0 +1,9 @@
+6 6
+7
+  K
+.....A
+.....A
+BBBC.A
+DDPC..
+E.PC..
+EFFF..
