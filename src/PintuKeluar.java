@@ -1,4 +1,26 @@
-public class PintuKeluar extends piece {
+public class PintuKeluar 
+
+{
+    private int x;
+    private int y;
+    private boolean isHorizontal;
+
+    public PintuKeluar(int x, int y, boolean isHorizontal) {
+        this.x = x;
+        this.y = y;
+        this.isHorizontal = isHorizontal;
+    }
+
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
+    }
+    public boolean isHorizontal() {
+        return isHorizontal;
+    }
+}
     // ditandai dengan K
 
     // K harus memiliki orientasi yang sama dengan P (misal P baris pertama, K juga
@@ -39,4 +61,4 @@ public class PintuKeluar extends piece {
     // ....
     // K
 
-}
+

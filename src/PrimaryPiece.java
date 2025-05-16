@@ -1,17 +1,24 @@
 
 public class PrimaryPiece extends Piece {
 
-    public PrimaryPiece(int size, boolean isHorizontal) {
-        super(size, isHorizontal, "P");
+    public PrimaryPiece(int width, boolean isHorizontal, String id) {
+        super(width, isHorizontal, id);
     }
-    // id piece nya p
-    // permainan bergantung jika primry piece sudah keluar dari pintu keluar atau K
-    // K akan selalu sebaris dengan P, ketika P horizontal, K juga horizontal
-    // ketika P vertikal, K juga vertikal
-    // K sebagai penanda
-}
+    public boolean isPrimaryPiece() {
+        return true;
+    }
 
-// jadi dalam p dan k dalam txt merupakan input untuk primary piece dan k
-// merupakan pintu keeluar. jadi nanti akan dibuat class primary piece dan pintu
-// keluar. untuk saat ini belum ada impelemntasi khusus untuk keduanya, anmun
-// tolong buat input handlernya dulu
+    public boolean isAtExit(Papan papan, PintuKeluar exit) {
+        for (int x = 0; x < papan.getWidth(); x++) {
+            for (int y = 0; y < papan.getHeight(); y++) {
+                Piece piece = papan.getPiece(x, y);
+                if (piece != null && piece == this) {
+                    if (x == exit.getX() && y == exit.getY()) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+}
