@@ -13,6 +13,7 @@ public class Gerakan {
         return direction;
     }
 
+    @Override
     public String toString() {
             String dirString = "";
             switch (direction) {
