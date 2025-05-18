@@ -6,7 +6,7 @@ public class Papan {
     public Papan(int width, int height) {
         this.width = width;
         this.height = height;
-        this.pieces = new Piece[width][height];
+        this.pieces = new Piece[height][width]; // row x col
     }
 
     public int getWidth() {
@@ -17,50 +17,39 @@ public class Papan {
         return height;
     }
 
-    public Piece getPiece(int x, int y) {
-        if (x < 0 || x >= width || y < 0 || y >= height) {
+    public Piece getPiece(int row, int col) {
+        if (row < 0 || row >= height || col < 0 || col >= width) {
             throw new IllegalArgumentException("Koordinat di luar batas papan.");
         }
-        return pieces[x][y];
+        return pieces[row][col];
     }
 
-    public void addPiece(Piece piece, int x, int y) {
-        int pieceLength = piece.getWidth();
-        boolean isHorizontal = piece.isHorizontal();
-
-        // Validasi: Pastikan piece tidak keluar dari batas papan
-        if (isHorizontal) {
-            if (x < 0 || x + pieceLength > width || y < 0 || y >= height) {
-                throw new IllegalArgumentException("Piece horizontal tidak muat di papan.");
+    public void addPiece(Piece piece) {
+        // Validasi: Pastikan posisi piece valid dan belum ditempati
+        for (Position pos : piece.getPositions()) {
+            int row = pos.getRow();
+            int col = pos.getCol();
+            if (row < 0 || row >= height || col < 0 || col >= width) {
+                throw new IllegalArgumentException("Piece keluar dari batas papan.");
             }
-        } else {
-            if (x < 0 || x >= width || y < 0 || y + pieceLength > height) {
-                throw new IllegalArgumentException("Piece vertikal tidak muat di papan.");
-            }
-        }
-
-        // Validasi: Pastikan cell yang akan ditempati kosong
-        for (int i = 0; i < pieceLength; i++) {
-            int checkX = isHorizontal ? x + i : x;
-            int checkY = isHorizontal ? y : y + i;
-            if (pieces[checkX][checkY] != null) {
+            if (pieces[row][col] != null) {
                 throw new IllegalArgumentException("Cell pada papan sudah terisi.");
             }
         }
 
-        // Tempatkan piece di papan
-        for (int i = 0; i < pieceLength; i++) {
-            int placeX = isHorizontal ? x + i : x;
-            int placeY = isHorizontal ? y : y + i;
-            pieces[placeX][placeY] = piece;
+        // Tempatkan piece ke papan sesuai posisi-posisinya
+        for (Position pos : piece.getPositions()) {
+            int row = pos.getRow();
+            int col = pos.getCol();
+            pieces[row][col] = piece;
         }
     }
 
     // Fungsi untuk mencetak papan
     public void printPapan() {
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                Piece piece = pieces[j][i];
+        for (int row = 0; row < height; row++) {
+            for (int col = 0; col < width; col++) {
+                Piece piece = pieces[row][col];
                 if (piece != null) {
                     System.out.print(piece.getId() + " ");
                 } else {

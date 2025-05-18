@@ -1,22 +1,31 @@
-
 public class PrimaryPiece extends Piece {
 
-    public PrimaryPiece(int width, boolean isHorizontal, String id) {
-        super(width, isHorizontal, id);
-    }
-    public boolean isPrimaryPiece() {
-        return true;
+    public PrimaryPiece() {
+        super("P"); // Primary piece selalu diberi ID 'P'
     }
 
-    public boolean isAtExit(Papan papan, PintuKeluar exit) {
-        for (int x = 0; x < papan.getWidth(); x++) {
-            for (int y = 0; y < papan.getHeight(); y++) {
-                Piece piece = papan.getPiece(x, y);
-                if (piece != null && piece == this) {
-                    if (x == exit.getX() && y == exit.getY()) {
-                        return true;
-                    }
-                }
+    @Override
+    public void determineOrientation() {
+        super.determineOrientation();
+        // Memastikan primary piece memiliki dimensi yang valid
+        // if (getSize() != 2) {
+        //     throw new IllegalArgumentException("Primary piece harus memiliki ukuran 2.");
+        // }
+    }
+
+    public boolean canExitAt(PintuKeluar exit) {
+        // memeriksa apakah orientasi primary piece cocok dengan pintu keluar
+        if (getOrientation() == Orientation.HORIZONTAL && !exit.isHorizontal()) {
+            return false;
+        }
+        if (getOrientation() == Orientation.VERTICAL && exit.isHorizontal()) {
+            return false;
+        }
+
+        // Memeriksa apakah primary piece berada di posisi pintu keluar
+        for (Position pos : getPositions()) {
+            if (pos.getRow() == exit.getRow() && pos.getCol() == exit.getCol()) {
+                return true;
             }
         }
         return false;

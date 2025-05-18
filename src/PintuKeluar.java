@@ -1,24 +1,32 @@
-public class PintuKeluar 
-
-{
-    private int x;
-    private int y;
+public class PintuKeluar {
+    private Position position;
     private boolean isHorizontal;
 
-    public PintuKeluar(int x, int y, boolean isHorizontal) {
-        this.x = x;
-        this.y = y;
+    public PintuKeluar(int row, int col, boolean isHorizontal) {
+        this.position = new Position(row, col);
         this.isHorizontal = isHorizontal;
     }
 
-    public int getX() {
-        return x;
+    public Position getPosition() {
+        return position;
     }
-    public int getY() {
-        return y;
+
+    public int getRow() {
+        return position.getRow();
     }
+
+    public int getCol() {
+        return position.getCol();
+    }
+
     public boolean isHorizontal() {
         return isHorizontal;
+    }
+
+    // memeriksa apakah pintu keluar cocok dengan orientasi piece
+    public boolean matchOrientation(Orientation orientation) {
+        return (isHorizontal && orientation == Orientation.HORIZONTAL) || 
+               (!isHorizontal && orientation == Orientation.VERTICAL);
     }
 }
     // ditandai dengan K
