@@ -30,6 +30,7 @@ public class Heuristic {
                 this.pieces.put(pieceId, newPiece);
             }
         }
+        this.papan.clear();
         for (Piece piece : this.pieces.values()) {
             this.papan.addPiece(piece);
         }
@@ -39,14 +40,14 @@ public class Heuristic {
         this.papan = new Papan(parentState.papan.getWidth(), parentState.papan.getHeight());
         this.pieces = new HashMap<>();
         this.pintuKeluar = parentState.pintuKeluar;
-
+    
         // copy all pieces
         for (String pieceId : parentState.pieces.keySet()) {
             Piece originalPiece = parentState.pieces.get(pieceId);
-
+    
             if(originalPiece instanceof PrimaryPiece) {
                 this.primaryPiece = new PrimaryPiece();
-
+    
                 for(Position position : originalPiece.getPositions()) {
                     this.primaryPiece.addPosition(position.getRow(), position.getCol());
                 }
@@ -58,13 +59,17 @@ public class Heuristic {
                 this.pieces.put(pieceId, newPiece);
             }
         }
+    
+        // **Clear papan supaya posisi lama hilang**
+        this.papan.clear();
+    
         // copy move history and add new move
         this.moveHistory = new ArrayList<>(parentState.moveHistory);
         this.moveHistory.add(move);
-
+    
         // apply the move to this state
         applyMove(move);
-
+    
         // places the pieces on the board
         for (Piece piece : this.pieces.values()) {
             try {
@@ -74,6 +79,7 @@ public class Heuristic {
             }
         }
     }
+    
 
     private void applyMove(Gerakan move) {
         String pieceId = move.getPieceID();

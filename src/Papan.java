@@ -45,6 +45,24 @@ public class Papan {
         }
     }
 
+    public void removePiece(Piece piece) {
+        // Hapus piece dari papan
+        for (Position pos : piece.getPositions()) {
+            int row = pos.getRow();
+            int col = pos.getCol();
+            pieces[row][col] = null;
+        }
+    }
+
+    public void clear() {
+        for (int row = 0; row < height; row++) {
+            for (int col = 0; col < width; col++) {
+                pieces[row][col] = null;
+            }
+        }
+    }
+    
+
     // Fungsi untuk mencetak papan
     public void printPapan() {
         for (int row = 0; row < height; row++) {

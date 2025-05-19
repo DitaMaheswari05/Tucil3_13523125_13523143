@@ -1,78 +1,214 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class InputHandler {
+    private int width;
+    private int height;
+    private int numPieces;
+    private Map<String, Piece> pieces;
+    private PrimaryPiece primaryPiece;
+    private PintuKeluar pintuKeluar;
+    private Papan papan;
 
-    public static Papan processInputFile(String filePath) throws IOException {
-        File file = new File(filePath);
-        BufferedReader br = new BufferedReader(new FileReader(file));
-
-        // baca ukuran papan
-        String[] size = br.readLine().split(" ");
-        int width = Integer.parseInt(size[0]);
-        int height = Integer.parseInt(size[1]);
-
-        // buat papan
-        Papan papan = new Papan(width, height);
-
-        // baca jumlah piece
-        int pieceCount = Integer.parseInt(br.readLine());
-
-        // Membaca representasi papan
-        char[][] board = new char[height][width];
-        for (int i = 0; i < height; i++) {
-            String line = br.readLine();
-            board[i] = line.toCharArray();
-        }
-
-        // Map untuk menyimpan pieces
-        Map<Character, Piece> pieces = new HashMap<>();
-
-        // Proses mengisi papan dengan piece
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                char id = board[i][j];
-                if (id != '.') {
-                    if (!pieces.containsKey(id)) {
-                        // Cari dimensi dan orientasi piece
-                        Piece newPiece = findPieceDimensions(board, id, i, j);
-                        pieces.put(id, newPiece);
-                        papan.addPiece(newPiece, j, i);
-                    }
-                }
-            }
-        }
-
-        br.close();
-        return papan;
+    public InputHandler() {
+        pieces = new HashMap<>();
     }
 
-    private static Piece findPieceDimensions(char[][] board, char id, int startRow, int startCol) {
-        int height = 0, width = 0;
+    /**
+     * Reads the puzzle configuration from a file
+     * @param fileName the name of the file to read
+     * @throws IOException if there's an error reading the file
+     */
+    public void readConfigFromFile(String fileName) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(fileName));
+    
+        // Read dimensions
+        String[] dimensions = reader.readLine().split(" ");
+        height = Integer.parseInt(dimensions[0]);
+        width = Integer.parseInt(dimensions[1]);
+    
+        // Read number of non-primary pieces (unused in this example, but read anyway)
+        numPieces = Integer.parseInt(reader.readLine());
+    
+        // Read all remaining lines (including possible extra border lines)
+        ArrayList<String> allLines = new ArrayList<>();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            if (!line.trim().isEmpty()) {
+                allLines.add(line);
+            }
+        }
+        reader.close();
+    
+        // Cari posisi K (pintu keluar)
+        // Bisa di luar papan (di baris sebelum papan, sesudah papan, atau di luar kolom)
+        boolean foundK = false;
+        int exitRow = -1, exitCol = -1;
         boolean isHorizontal = false;
-
-        // Cek horizontal
-        for (int col = startCol; col < board[0].length && board[startRow][col] == id; col++) {
-            width++;
+    
+        // Misal papan dimulai di baris tertentu dalam allLines:
+        // Karena kita baca height baris papan, coba cari window baris mana yang jadi papan:
+        // Asumsi: papan ada di tengah allLines, bisa coba cari window height baris yang cocok (atau asumsi langsung di tengah)
+    
+        // Sederhana: cari semua K di allLines, cari posisi dengan memperhitungkan papan di tengah:
+        for (int i = 0; i < allLines.size(); i++) {
+            String currLine = allLines.get(i);
+            for (int j = 0; j < currLine.length(); j++) {
+                if (currLine.charAt(j) == 'K') {
+                    foundK = true;
+                    exitRow = i;
+                    exitCol = j;
+                    break;
+                }
+            }
+            if (foundK) break;
         }
-
-        // Cek vertikal
-        for (int row = startRow; row < board.length && board[row][startCol] == id; row++) {
-            height++;
+    
+        if (!foundK) {
+            throw new IllegalArgumentException("Pintu keluar (K) tidak ditemukan di papan.");
         }
-
-        // Tentukan orientasi
-        isHorizontal = width > height;
-
-        // Validasi dimensi
-        if (!(width == 1 || height == 1)) {
-            throw new IllegalArgumentException("Piece tidak valid (bukan rectangular).");
+    
+        // Sekarang kita asumsikan papan berada di allLines dari baris tertentu
+        // Kita cari window baris di allLines yang ukurannya height dengan asumsi papan ada di tengah (atau coba cocokkan)
+        // Supaya mudah, coba papan dimulai di baris: startIndex = exitRow - height/2 (asumsi pintu keluar di luar board)
+        int startIndex = -1;
+    
+        // Coba cari startIndex agar allLines.subList(startIndex, startIndex + height) panjangnya height dan tiap baris >= width
+        for (int possibleStart = 0; possibleStart <= allLines.size() - height; possibleStart++) {
+            boolean valid = true;
+            for (int k = 0; k < height; k++) {
+                if (allLines.get(possibleStart + k).length() < width) {
+                    valid = false;
+                    break;
+                }
+            }
+            if (valid) {
+                startIndex = possibleStart;
+                break;
+            }
         }
-
-        if (id == 'P') {
-            return new PrimaryPiece(Math.max(width, height), isHorizontal);
+    
+        if (startIndex == -1) {
+            throw new IllegalArgumentException("Tidak ditemukan baris papan yang valid di file input.");
+        }
+    
+        // Inisialisasi papan 2D
+        char[][] board = new char[height][width];
+    
+        for (int i = 0; i < height; i++) {
+            String rowLine = allLines.get(startIndex + i);
+            for (int j = 0; j < width; j++) {
+                board[i][j] = rowLine.charAt(j);
+            }
+        }
+    
+        // Tentukan apakah pintu keluar horizontal atau vertical
+        // Jika exitRow < startIndex → pintu keluar di atas papan → horizontal
+        // Jika exitRow >= startIndex + height → pintu keluar di bawah papan → horizontal
+        // Jika exitRow di dalam range papan → pintu keluar di samping → vertical
+        if (exitRow < startIndex || exitRow >= startIndex + height) {
+            isHorizontal = true;
+            // Karena pintu di luar baris papan, exitRow relatif ke papan = -1 (atas) atau height (bawah)
+            if (exitRow < startIndex) {
+                exitRow = -1; // atas
+            } else {
+                exitRow = height; // bawah
+            }
         } else {
-            return new Piece(Math.max(width, height), isHorizontal, String.valueOf(id));
+            isHorizontal = false;
+            // pintu keluar di samping kiri (-1) atau kanan (width)
+            if (exitCol < 0) exitCol = -1;
+            else if (exitCol >= width) exitCol = width;
+            // exitRow sudah disesuaikan karena di dalam papan
+            exitRow = exitRow - startIndex;
         }
+    
+        pintuKeluar = new PintuKeluar(exitRow, exitCol, isHorizontal);
+    
+        // Simpan dan proses papan
+        papan = new Papan(width, height);
+        processBoardConfiguration(board);
+    }
+    
+
+    /**
+     * Processes the board configuration to identify all pieces
+     * @param board the board configuration as a 2D array of characters
+     */
+    private void processBoardConfiguration(char[][] board) {
+        processPieces(board);
+        for (Piece piece : pieces.values()) {
+            papan.addPiece(piece);
+        }
+    }
+
+    /**
+     * Identifies all pieces in the board configuration
+     * @param board the board configuration
+     */
+    private void processPieces(char[][] board) {
+        boolean[][] processed = new boolean[height][width];
+
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                if (processed[i][j] || board[i][j] == '.' || board[i][j] == 'K') {
+                    continue;
+                }
+
+                String pieceId = String.valueOf(board[i][j]);
+
+                Piece piece;
+                if (pieceId.equals("P")) {
+                    primaryPiece = new PrimaryPiece();
+                    piece = primaryPiece;
+                } else {
+                    piece = new Piece(pieceId);
+                }
+
+                identifyPieceCells(board, processed, piece, i, j, pieceId);
+                piece.determineOrientation();
+                pieces.put(pieceId, piece);
+            }
+        }
+    }
+
+    private void identifyPieceCells(char[][] board, boolean[][] processed, Piece piece, int startRow, int startCol, String pieceId) {
+        piece.addPosition(startRow, startCol);
+        processed[startRow][startCol] = true;
+
+        int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        for (int[] dir : directions) {
+            int newRow = startRow + dir[0];
+            int newCol = startCol + dir[1];
+
+            if (isValidCell(newRow, newCol) && !processed[newRow][newCol] &&
+                board[newRow][newCol] == pieceId.charAt(0)) {
+                identifyPieceCells(board, processed, piece, newRow, newCol, pieceId);
+            }
+        }
+    }
+
+    private boolean isValidCell(int row, int col) {
+        return row >= 0 && row < height && col >= 0 && col < width;
+    }
+
+    public Map<String, Piece> getPieces() {
+        return pieces;
+    }
+
+    public PrimaryPiece getPrimaryPiece() {
+        return primaryPiece;
+    }
+
+    public PintuKeluar getPintuKeluar() {
+        return pintuKeluar;
+    }
+
+    public Papan getPapan() {
+        return papan;
     }
 }
