@@ -47,7 +47,7 @@ public class GreedyBestFirstSearch {
             // generate successors
             List<Heuristic> successors = current.getSuccessors();
             for (Heuristic successor : successors) {
-                if (!closedSet.contains(successor)) {
+                if (closedSet.contains(successor)) {
                     continue;
                 }
                 if (!openSet.contains(successor)) {
