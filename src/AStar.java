@@ -21,7 +21,7 @@ public class AStar {
 
     public List<Gerakan> solve() {
         PriorityQueue<Heuristic> openSet = new PriorityQueue<>(
-            (a, b) -> Integer.compare(f(a), f(b)) // compare heuristic values
+            (a, b) -> Integer.compare(f(a), f(b)) // compare g(n) + h(n)
         );
 
         // closed set to track of visited states
