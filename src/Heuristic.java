@@ -175,7 +175,7 @@ public class Heuristic {
             int startCol = endPosition.getCol() + 1;
             int endCol = exitPosition.getCol();
 
-            for (int col = startCol; col <= endCol; row++) {
+            for (int col = startCol; col <= endCol; col++) {
                 if (col < papan.getWidth() && papan.getPiece(row, col) != null) {
                     count++;
                 }
@@ -236,7 +236,7 @@ public class Heuristic {
             Piece thisPiece = this.pieces.get(pieceId);
             Piece otherPiece = other.pieces.get(pieceId);
 
-            if(otherPiece == null || !thisPiece.equals(obj)) return false;
+            if (otherPiece == null || !thisPiece.equals(otherPiece)) return false;
         }
         return true;
     }

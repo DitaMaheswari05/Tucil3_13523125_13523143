@@ -6,8 +6,12 @@ public class Piece {
     private String id; // ID piece
 
     public Piece(String id) {
-        if (!id.matches("[A-Z]") || id.equals("P") || id.equals("K")) {
-            throw new IllegalArgumentException("ID harus huruf A-Z kecuali P dan K.");
+        if (!id.matches("[A-Z]")) {
+            throw new IllegalArgumentException("ID harus huruf A-Z.");
+        }
+        // Validasi 'P' dan 'K' hanya jika bukan kelas turunan
+        if ((id.equals("P") || id.equals("K")) && getClass() == Piece.class) {
+            throw new IllegalArgumentException("ID 'P' dan 'K' khusus digunakan untuk primary piece dan pintu keluar.");
         }
         this.id = id;
         this.positions = new ArrayList<>();
