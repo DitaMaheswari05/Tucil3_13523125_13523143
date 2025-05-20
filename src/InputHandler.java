@@ -51,14 +51,6 @@ public class InputHandler {
         int exitRow = -1, exitCol = -1;
         boolean isHorizontal = false;
 
-        // Misal papan dimulai di baris tertentu dalam allLines:
-        // Karena kita baca height baris papan, coba cari window baris mana yang jadi
-        // papan:
-        // Asumsi: papan ada di tengah allLines, bisa coba cari window height baris yang
-        // cocok (atau asumsi langsung di tengah)
-
-        // Sederhana: cari semua K di allLines, cari posisi dengan memperhitungkan papan
-        // di tengah:
         for (int i = 0; i < allLines.size(); i++) {
             String currLine = allLines.get(i);
             for (int j = 0; j < currLine.length(); j++) {
@@ -77,11 +69,6 @@ public class InputHandler {
             throw new IllegalArgumentException("Pintu keluar (K) tidak ditemukan di papan.");
         }
 
-        // Sekarang kita asumsikan papan berada di allLines dari baris tertentu
-        // Kita cari window baris di allLines yang ukurannya height dengan asumsi papan
-        // ada di tengah (atau coba cocokkan)
-        // Supaya mudah, coba papan dimulai di baris: startIndex = exitRow - height/2
-        // (asumsi pintu keluar di luar board)
         int startIndex = -1;
 
         // Coba cari startIndex agar allLines.subList(startIndex, startIndex + height)
@@ -146,11 +133,6 @@ public class InputHandler {
             }
         }
 
-        // Tentukan apakah pintu keluar horizontal atau vertical
-        // Jika exitRow < startIndex → pintu keluar di atas papan → horizontal
-        // Jika exitRow >= startIndex + height → pintu keluar di bawah papan →
-        // horizontal
-        // Jika exitRow di dalam range papan → pintu keluar di samping → vertical
         if (exitRow < startIndex || exitRow >= startIndex + height) {
             isHorizontal = false;
             // Karena pintu di luar baris papan, exitRow relatif ke papan = -1 (atas) atau
