@@ -1,0 +1,153 @@
+Papan Awal
+JJ...I
+LL...I
+FEGGGD
+FEBPPD
+CEB..D
+C.B.AA
+
+Gerakan 1: L-kanan
+JJ...I
+.LL..I
+FEGGGD
+FEBPPD
+CEB..D
+C.B.AA
+
+Gerakan 2: J-kanan
+.JJ..I
+.LL..I
+FEGGGD
+FEBPPD
+CEB..D
+C.B.AA
+
+Gerakan 3: L-kanan
+.JJ..I
+..LL.I
+FEGGGD
+FEBPPD
+CEB..D
+C.B.AA
+
+Gerakan 4: A-kiri
+.JJ..I
+..LL.I
+FEGGGD
+FEBPPD
+CEB..D
+C.BAA.
+
+Gerakan 5: D-bawah
+.JJ..I
+..LL.I
+FEGGG.
+FEBPPD
+CEB..D
+C.BAAD
+
+Gerakan 6: L-kanan
+.JJ..I
+...LLI
+FEGGG.
+FEBPPD
+CEB..D
+C.BAAD
+
+Gerakan 7: G-kanan
+.JJ..I
+...LLI
+FE.GGG
+FEBPPD
+CEB..D
+C.BAAD
+
+Gerakan 8: B-atas
+.JJ..I
+...LLI
+FEBGGG
+FEBPPD
+CEB..D
+C..AAD
+
+Gerakan 9: J-kanan
+..JJ.I
+...LLI
+FEBGGG
+FEBPPD
+CEB..D
+C..AAD
+
+Gerakan 10: B-atas
+..JJ.I
+..BLLI
+FEBGGG
+FEBPPD
+CE...D
+C..AAD
+
+Gerakan 11: E-atas
+..JJ.I
+.EBLLI
+FEBGGG
+FEBPPD
+C....D
+C..AAD
+
+Gerakan 12: J-kanan
+...JJI
+.EBLLI
+FEBGGG
+FEBPPD
+C....D
+C..AAD
+
+Gerakan 13: E-atas
+.E.JJI
+.EBLLI
+FEBGGG
+F.BPPD
+C....D
+C..AAD
+
+Gerakan 14: B-atas
+.EBJJI
+.EBLLI
+FEBGGG
+F..PPD
+C....D
+C..AAD
+
+Gerakan 15: P-kiri
+.EBJJI
+.EBLLI
+FEBGGG
+F.PP.D
+C....D
+C..AAD
+
+Gerakan 16: F-atas
+.EBJJI
+FEBLLI
+FEBGGG
+..PP.D
+C....D
+C..AAD
+
+Gerakan 17: P-kiri
+.EBJJI
+FEBLLI
+FEBGGG
+.PP..D
+C....D
+C..AAD
+
+Gerakan 18: P-kiri
+.EBJJI
+FEBLLI
+FEBGGG
+PP...D
+C....D
+C..AAD
+
+Solution found with 18 moves.

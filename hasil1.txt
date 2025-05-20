@@ -1,0 +1,81 @@
+Papan Awal
+AAB..F
+..BCDF
+GPPCDF
+GH.III
+GHJ...
+LLJMM.
+
+Gerakan 1: I-kiri
+AAB..F
+..BCDF
+GPPCDF
+GHIII.
+GHJ...
+LLJMM.
+
+Gerakan 2: F-bawah
+AAB...
+..BCDF
+GPPCDF
+GHIIIF
+GHJ...
+LLJMM.
+
+Gerakan 3: F-bawah
+AAB...
+..BCD.
+GPPCDF
+GHIIIF
+GHJ..F
+LLJMM.
+
+Gerakan 4: C-atas
+AABC..
+..BCD.
+GPP.DF
+GHIIIF
+GHJ..F
+LLJMM.
+
+Gerakan 5: P-kanan
+AABC..
+..BCD.
+G.PPDF
+GHIIIF
+GHJ..F
+LLJMM.
+
+Gerakan 6: D-atas
+AABCD.
+..BCD.
+G.PP.F
+GHIIIF
+GHJ..F
+LLJMM.
+
+Gerakan 7: F-bawah
+AABCD.
+..BCD.
+G.PP..
+GHIIIF
+GHJ..F
+LLJMMF
+
+Gerakan 8: P-kanan
+AABCD.
+..BCD.
+G..PP.
+GHIIIF
+GHJ..F
+LLJMMF
+
+Gerakan 9: P-kanan
+AABCD.
+..BCD.
+G...PP
+GHIIIF
+GHJ..F
+LLJMMF
+
+Solution found with 9 moves.

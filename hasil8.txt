@@ -1,0 +1,273 @@
+Papan Awal
+......
+......
+.PPA..
+.BBA.C
+.D.A.C
+.DEE.C
+
+Gerakan 1: A-atas
+......
+...A..
+.PPA..
+.BBA.C
+.D...C
+.DEE.C
+
+Gerakan 2: C-atas
+......
+...A..
+.PPA.C
+.BBA.C
+.D...C
+.DEE..
+
+Gerakan 3: C-atas
+......
+...A.C
+.PPA.C
+.BBA.C
+.D....
+.DEE..
+
+Gerakan 4: A-atas
+...A..
+...A.C
+.PPA.C
+.BB..C
+.D....
+.DEE..
+
+Gerakan 5: B-kanan
+...A..
+...A.C
+.PPA.C
+..BB.C
+.D....
+.DEE..
+
+Gerakan 6: B-kanan
+...A..
+...A.C
+.PPA.C
+...BBC
+.D....
+.DEE..
+
+Gerakan 7: C-atas
+...A.C
+...A.C
+.PPA.C
+...BB.
+.D....
+.DEE..
+
+Gerakan 8: B-kanan
+...A.C
+...A.C
+.PPA.C
+....BB
+.D....
+.DEE..
+
+Gerakan 9: A-bawah
+.....C
+...A.C
+.PPA.C
+...ABB
+.D....
+.DEE..
+
+Gerakan 10: A-bawah
+.....C
+.....C
+.PPA.C
+...ABB
+.D.A..
+.DEE..
+
+Gerakan 11: D-atas
+.....C
+.....C
+.PPA.C
+.D.ABB
+.D.A..
+..EE..
+
+Gerakan 12: E-kiri
+.....C
+.....C
+.PPA.C
+.D.ABB
+.D.A..
+.EE...
+
+Gerakan 13: A-bawah
+.....C
+.....C
+.PP..C
+.D.ABB
+.D.A..
+.EEA..
+
+Gerakan 14: P-kanan
+.....C
+.....C
+..PP.C
+.D.ABB
+.D.A..
+.EEA..
+
+Gerakan 15: D-atas
+.....C
+.....C
+.DPP.C
+.D.ABB
+...A..
+.EEA..
+
+Gerakan 16: D-atas
+.....C
+.D...C
+.DPP.C
+...ABB
+...A..
+.EEA..
+
+Gerakan 17: D-atas
+.D...C
+.D...C
+..PP.C
+...ABB
+...A..
+.EEA..
+
+Gerakan 18: P-kiri
+.D...C
+.D...C
+.PP..C
+...ABB
+...A..
+.EEA..
+
+Gerakan 19: A-atas
+.D...C
+.D...C
+.PPA.C
+...ABB
+...A..
+.EE...
+
+Gerakan 20: A-atas
+.D...C
+.D.A.C
+.PPA.C
+...ABB
+......
+.EE...
+
+Gerakan 21: A-atas
+.D.A.C
+.D.A.C
+.PPA.C
+....BB
+......
+.EE...
+
+Gerakan 22: B-kiri
+.D.A.C
+.D.A.C
+.PPA.C
+...BB.
+......
+.EE...
+
+Gerakan 23: C-bawah
+.D.A..
+.D.A.C
+.PPA.C
+...BBC
+......
+.EE...
+
+Gerakan 24: C-bawah
+.D.A..
+.D.A..
+.PPA.C
+...BBC
+.....C
+.EE...
+
+Gerakan 25: C-bawah
+.D.A..
+.D.A..
+.PPA..
+...BBC
+.....C
+.EE..C
+
+Gerakan 26: B-kiri
+.D.A..
+.D.A..
+.PPA..
+..BB.C
+.....C
+.EE..C
+
+Gerakan 27: B-kiri
+.D.A..
+.D.A..
+.PPA..
+.BB..C
+.....C
+.EE..C
+
+Gerakan 28: A-bawah
+.D....
+.D.A..
+.PPA..
+.BBA.C
+.....C
+.EE..C
+
+Gerakan 29: A-bawah
+.D....
+.D....
+.PPA..
+.BBA.C
+...A.C
+.EE..C
+
+Gerakan 30: A-bawah
+.D....
+.D....
+.PP...
+.BBA.C
+...A.C
+.EEA.C
+
+Gerakan 31: P-kanan
+.D....
+.D....
+..PP..
+.BBA.C
+...A.C
+.EEA.C
+
+Gerakan 32: P-kanan
+.D....
+.D....
+...PP.
+.BBA.C
+...A.C
+.EEA.C
+
+Gerakan 33: P-kanan
+.D....
+.D....
+....PP
+.BBA.C
+...A.C
+.EEA.C
+
+Solution found with 33 moves.

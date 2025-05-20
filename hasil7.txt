@@ -1,0 +1,265 @@
+Papan Awal
+ABBBCD
+A.EPCD
+..EPFF
+GGE...
+HI...M
+HIJJJM
+
+Gerakan 1: P-bawah
+ABBBCD
+A.E.CD
+..EPFF
+GGEP..
+HI...M
+HIJJJM
+
+Gerakan 2: P-bawah
+ABBBCD
+A.E.CD
+..E.FF
+GGEP..
+HI.P.M
+HIJJJM
+
+Gerakan 3: M-atas
+ABBBCD
+A.E.CD
+..E.FF
+GGEP.M
+HI.P.M
+HIJJJ.
+
+Gerakan 4: J-kanan
+ABBBCD
+A.E.CD
+..E.FF
+GGEP.M
+HI.P.M
+HI.JJJ
+
+Gerakan 5: F-kiri
+ABBBCD
+A.E.CD
+..EFF.
+GGEP.M
+HI.P.M
+HI.JJJ
+
+Gerakan 6: D-bawah
+ABBBC.
+A.E.CD
+..EFFD
+GGEP.M
+HI.P.M
+HI.JJJ
+
+Gerakan 7: E-bawah
+ABBBC.
+A...CD
+..EFFD
+GGEP.M
+HIEP.M
+HI.JJJ
+
+Gerakan 8: E-bawah
+ABBBC.
+A...CD
+...FFD
+GGEP.M
+HIEP.M
+HIEJJJ
+
+Gerakan 9: F-kiri
+ABBBC.
+A...CD
+..FF.D
+GGEP.M
+HIEP.M
+HIEJJJ
+
+Gerakan 10: F-kiri
+ABBBC.
+A...CD
+.FF..D
+GGEP.M
+HIEP.M
+HIEJJJ
+
+Gerakan 11: F-kiri
+ABBBC.
+A...CD
+FF...D
+GGEP.M
+HIEP.M
+HIEJJJ
+
+Gerakan 12: C-bawah
+ABBB..
+A...CD
+FF..CD
+GGEP.M
+HIEP.M
+HIEJJJ
+
+Gerakan 13: E-atas
+ABBB..
+A...CD
+FFE.CD
+GGEP.M
+HIEP.M
+HI.JJJ
+
+Gerakan 14: E-atas
+ABBB..
+A.E.CD
+FFE.CD
+GGEP.M
+HI.P.M
+HI.JJJ
+
+Gerakan 15: B-kanan
+A.BBB.
+A.E.CD
+FFE.CD
+GGEP.M
+HI.P.M
+HI.JJJ
+
+Gerakan 16: B-kanan
+A..BBB
+A.E.CD
+FFE.CD
+GGEP.M
+HI.P.M
+HI.JJJ
+
+Gerakan 17: E-atas
+A.EBBB
+A.E.CD
+FFE.CD
+GG.P.M
+HI.P.M
+HI.JJJ
+
+Gerakan 18: G-kanan
+A.EBBB
+A.E.CD
+FFE.CD
+.GGP.M
+HI.P.M
+HI.JJJ
+
+Gerakan 19: J-kiri
+A.EBBB
+A.E.CD
+FFE.CD
+.GGP.M
+HI.P.M
+HIJJJ.
+
+Gerakan 20: P-atas
+A.EBBB
+A.E.CD
+FFEPCD
+.GGP.M
+HI...M
+HIJJJ.
+
+Gerakan 21: P-atas
+A.EBBB
+A.EPCD
+FFEPCD
+.GG..M
+HI...M
+HIJJJ.
+
+Gerakan 22: G-kanan
+A.EBBB
+A.EPCD
+FFEPCD
+..GG.M
+HI...M
+HIJJJ.
+
+Gerakan 23: M-bawah
+A.EBBB
+A.EPCD
+FFEPCD
+..GG..
+HI...M
+HIJJJM
+
+Gerakan 24: G-kanan
+A.EBBB
+A.EPCD
+FFEPCD
+...GG.
+HI...M
+HIJJJM
+
+Gerakan 25: G-kanan
+A.EBBB
+A.EPCD
+FFEPCD
+....GG
+HI...M
+HIJJJM
+
+Gerakan 26: P-bawah
+A.EBBB
+A.E.CD
+FFEPCD
+...PGG
+HI...M
+HIJJJM
+
+Gerakan 27: P-bawah
+A.EBBB
+A.E.CD
+FFE.CD
+...PGG
+HI.P.M
+HIJJJM
+
+Gerakan 28: I-atas
+A.EBBB
+A.E.CD
+FFE.CD
+.I.PGG
+HI.P.M
+H.JJJM
+
+Gerakan 29: J-kiri
+A.EBBB
+A.E.CD
+FFE.CD
+.I.PGG
+HI.P.M
+HJJJ.M
+
+Gerakan 30: H-atas
+A.EBBB
+A.E.CD
+FFE.CD
+HI.PGG
+HI.P.M
+.JJJ.M
+
+Gerakan 31: J-kiri
+A.EBBB
+A.E.CD
+FFE.CD
+HI.PGG
+HI.P.M
+JJJ..M
+
+Gerakan 32: P-bawah
+A.EBBB
+A.E.CD
+FFE.CD
+HI..GG
+HI.P.M
+JJJP.M
+
+Solution found with 32 moves.

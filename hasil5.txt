@@ -1,0 +1,17 @@
+Papan Awal
+......
+......
+.PPE..
+.DDE.A
+.C.E.A
+.CBB.A
+
+Gerakan 1: P-kiri
+......
+......
+PP.E..
+.DDE.A
+.C.E.A
+.CBB.A
+
+Solution found with 1 moves.

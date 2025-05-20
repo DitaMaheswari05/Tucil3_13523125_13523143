@@ -1,6 +1,9 @@
 import java.util.*;
+import java.util.logging.Logger;
 
 public class Heuristic {
+    private static final Logger logger = Logger.getLogger(Heuristic.class.getName());
+
     private Map<String, Piece> pieces;
     private List<Gerakan> moveHistory;
     private PrimaryPiece primaryPiece;
@@ -169,16 +172,19 @@ public class Heuristic {
                 if (piece.getId().equals("P") && pintuKeluar != null) {
                     PrimaryPiece tempPrimary = new PrimaryPiece();
                     for (Position pos : tempPiece.getPositions()) {
+                        logger.info("gerakan keluar dari papan: " + pos.getRow() + ", " + pos.getCol());
                         tempPrimary.addPosition(pos.getRow(), pos.getCol());
                     }
                     tempPrimary.determineOrientation();
                 }
+                logger.warning("[DEBUG] Gerakan keluar dari papan tidak valid untuk piece selain primary.");
                 return false;
             }
 
             // cek tabrakan dengan piece lain
             Piece otherPiece = papan.getPiece(row, col);
             if (otherPiece != null && !otherPiece.getId().equals(piece.getId())) {
+                logger.warning("[DEBUG] Tabrakan dengan piece lain: " + otherPiece.getId());
                 return false;
             }
         }

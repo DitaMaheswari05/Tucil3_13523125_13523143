@@ -1,0 +1,401 @@
+Papan Awal
+.....A
+.....A
+BBBC.A
+DDPC..
+E.PC..
+EFFF..
+
+Gerakan 1: F-kanan
+.....A
+.....A
+BBBC.A
+DDPC..
+E.PC..
+E.FFF.
+
+Gerakan 2: F-kanan
+.....A
+.....A
+BBBC.A
+DDPC..
+E.PC..
+E..FFF
+
+Gerakan 3: P-bawah
+.....A
+.....A
+BBBC.A
+DD.C..
+E.PC..
+E.PFFF
+
+Gerakan 4: D-kanan
+.....A
+.....A
+BBBC.A
+.DDC..
+E.PC..
+E.PFFF
+
+Gerakan 5: C-atas
+.....A
+...C.A
+BBBC.A
+.DDC..
+E.P...
+E.PFFF
+
+Gerakan 6: C-atas
+...C.A
+...C.A
+BBBC.A
+.DD...
+E.P...
+E.PFFF
+
+Gerakan 7: D-kanan
+...C.A
+...C.A
+BBBC.A
+..DD..
+E.P...
+E.PFFF
+
+Gerakan 8: D-kanan
+...C.A
+...C.A
+BBBC.A
+...DD.
+E.P...
+E.PFFF
+
+Gerakan 9: P-atas
+...C.A
+...C.A
+BBBC.A
+..PDD.
+E.P...
+E..FFF
+
+Gerakan 10: D-kanan
+...C.A
+...C.A
+BBBC.A
+..P.DD
+E.P...
+E..FFF
+
+Gerakan 11: F-kiri
+...C.A
+...C.A
+BBBC.A
+..P.DD
+E.P...
+E.FFF.
+
+Gerakan 12: E-atas
+...C.A
+...C.A
+BBBC.A
+E.P.DD
+E.P...
+..FFF.
+
+Gerakan 13: C-bawah
+.....A
+...C.A
+BBBC.A
+E.PCDD
+E.P...
+..FFF.
+
+Gerakan 14: F-kiri
+.....A
+...C.A
+BBBC.A
+E.PCDD
+E.P...
+.FFF..
+
+Gerakan 15: F-kiri
+.....A
+...C.A
+BBBC.A
+E.PCDD
+E.P...
+FFF...
+
+Gerakan 16: C-bawah
+.....A
+.....A
+BBBC.A
+E.PCDD
+E.PC..
+FFF...
+
+Gerakan 17: C-bawah
+.....A
+.....A
+BBB..A
+E.PCDD
+E.PC..
+FFFC..
+
+Gerakan 18: B-kanan
+.....A
+.....A
+.BBB.A
+E.PCDD
+E.PC..
+FFFC..
+
+Gerakan 19: E-atas
+.....A
+.....A
+EBBB.A
+E.PCDD
+..PC..
+FFFC..
+
+Gerakan 20: E-atas
+.....A
+E....A
+EBBB.A
+..PCDD
+..PC..
+FFFC..
+
+Gerakan 21: E-atas
+E....A
+E....A
+.BBB.A
+..PCDD
+..PC..
+FFFC..
+
+Gerakan 22: B-kiri
+E....A
+E....A
+BBB..A
+..PCDD
+..PC..
+FFFC..
+
+Gerakan 23: C-atas
+E....A
+E....A
+BBBC.A
+..PCDD
+..PC..
+FFF...
+
+Gerakan 24: C-atas
+E....A
+E..C.A
+BBBC.A
+..PCDD
+..P...
+FFF...
+
+Gerakan 25: F-kanan
+E....A
+E..C.A
+BBBC.A
+..PCDD
+..P...
+.FFF..
+
+Gerakan 26: F-kanan
+E....A
+E..C.A
+BBBC.A
+..PCDD
+..P...
+..FFF.
+
+Gerakan 27: C-atas
+E..C.A
+E..C.A
+BBBC.A
+..P.DD
+..P...
+..FFF.
+
+Gerakan 28: F-kanan
+E..C.A
+E..C.A
+BBBC.A
+..P.DD
+..P...
+...FFF
+
+Gerakan 29: P-bawah
+E..C.A
+E..C.A
+BBBC.A
+....DD
+..P...
+..PFFF
+
+Gerakan 30: D-kiri
+E..C.A
+E..C.A
+BBBC.A
+...DD.
+..P...
+..PFFF
+
+Gerakan 31: D-kiri
+E..C.A
+E..C.A
+BBBC.A
+..DD..
+..P...
+..PFFF
+
+Gerakan 32: D-kiri
+E..C.A
+E..C.A
+BBBC.A
+.DD...
+..P...
+..PFFF
+
+Gerakan 33: D-kiri
+E..C.A
+E..C.A
+BBBC.A
+DD....
+..P...
+..PFFF
+
+Gerakan 34: P-atas
+E..C.A
+E..C.A
+BBBC.A
+DDP...
+..P...
+...FFF
+
+Gerakan 35: A-bawah
+E..C..
+E..C.A
+BBBC.A
+DDP..A
+..P...
+...FFF
+
+Gerakan 36: F-kiri
+E..C..
+E..C.A
+BBBC.A
+DDP..A
+..P...
+..FFF.
+
+Gerakan 37: F-kiri
+E..C..
+E..C.A
+BBBC.A
+DDP..A
+..P...
+.FFF..
+
+Gerakan 38: C-bawah
+E.....
+E..C.A
+BBBC.A
+DDPC.A
+..P...
+.FFF..
+
+Gerakan 39: A-bawah
+E.....
+E..C..
+BBBC.A
+DDPC.A
+..P..A
+.FFF..
+
+Gerakan 40: C-bawah
+E.....
+E.....
+BBBC.A
+DDPC.A
+..PC.A
+.FFF..
+
+Gerakan 41: F-kiri
+E.....
+E.....
+BBBC.A
+DDPC.A
+..PC.A
+FFF...
+
+Gerakan 42: C-bawah
+E.....
+E.....
+BBB..A
+DDPC.A
+..PC.A
+FFFC..
+
+Gerakan 43: A-bawah
+E.....
+E.....
+BBB...
+DDPC.A
+..PC.A
+FFFC.A
+
+Gerakan 44: B-kanan
+E.....
+E.....
+.BBB..
+DDPC.A
+..PC.A
+FFFC.A
+
+Gerakan 45: B-kanan
+E.....
+E.....
+..BBB.
+DDPC.A
+..PC.A
+FFFC.A
+
+Gerakan 46: B-kanan
+E.....
+E.....
+...BBB
+DDPC.A
+..PC.A
+FFFC.A
+
+Gerakan 47: P-atas
+E.....
+E.....
+..PBBB
+DDPC.A
+...C.A
+FFFC.A
+
+Gerakan 48: P-atas
+E.....
+E.P...
+..PBBB
+DD.C.A
+...C.A
+FFFC.A
+
+Gerakan 49: P-atas
+E.P...
+E.P...
+...BBB
+DD.C.A
+...C.A
+FFFC.A
+
+Solution found with 49 moves.
