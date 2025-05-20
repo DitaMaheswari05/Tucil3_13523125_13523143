@@ -1,3 +1,4 @@
+
 public class Papan {
     private int width;
     private int height;
@@ -15,6 +16,10 @@ public class Papan {
 
     public int getHeight() {
         return height;
+    }
+
+    public Piece[][] getPieces() {
+        return pieces;
     }
 
     public Piece getPiece(int row, int col) {
@@ -45,6 +50,10 @@ public class Papan {
         }
     }
 
+    public void setPiece(int row, int col, Piece piece) {
+        pieces[row][col] = piece;
+    }
+
     public void removePiece(Piece piece) {
         // Hapus piece dari papan
         for (Position pos : piece.getPositions()) {
@@ -61,7 +70,6 @@ public class Papan {
             }
         }
     }
-    
 
     // Fungsi untuk mencetak papan
     public void printPapan() {
