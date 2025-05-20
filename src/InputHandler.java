@@ -155,7 +155,41 @@ public class InputHandler {
         logger.info("Papan dimensi: " + height + " x " + width);
         papan = new Papan(width, height);
         processBoardConfiguration(board);
-        printBoard(papan, pintuKeluar);
+
+        // Validasi primary piece dan pintu keluar
+        if (primaryPiece != null && pintuKeluar != null) {
+            if (primaryPiece.getOrientation() == Orientation.HORIZONTAL) {
+                if (!pintuKeluar.isHorizontal()) {
+                    throw new IllegalArgumentException("Posisi pintu keluar tidak sesuai.");
+                }
+                boolean sameRow = false;
+                for (Position pos : primaryPiece.getPositions()) {
+                    if (pos.getRow() == pintuKeluar.getRow()) {
+                        sameRow = true;
+                        break;
+                    }
+                }
+                if (!sameRow) {
+                    throw new IllegalArgumentException(
+                            "Posisi pintu keluar tidak sesuai.");
+                }
+            } else if (primaryPiece.getOrientation() == Orientation.VERTICAL) {
+                if (pintuKeluar.isHorizontal()) {
+                    throw new IllegalArgumentException("Posisi pintu keluar tidak sesuai.");
+                }
+                boolean sameCol = false;
+                for (Position pos : primaryPiece.getPositions()) {
+                    if (pos.getCol() == pintuKeluar.getCol()) {
+                        sameCol = true;
+                        break;
+                    }
+                }
+                if (!sameCol) {
+                    throw new IllegalArgumentException(
+                            "Posisi pintu keluar tidak sesuai.");
+                }
+            }
+        }
     }
 
     /**
@@ -238,79 +272,4 @@ public class InputHandler {
         return papan;
     }
 
-    private void printBoard(Papan papan, PintuKeluar pintuKeluar) {
-        // ANSI color codes
-        final String RESET = "\u001B[0m";
-        final String PRIMARY_COLOR = "\u001B[32m"; // Green for primary piece
-        final String EXIT_COLOR = "\u001B[35m"; // Purple for exit door
-        final String MOVED_COLOR = "\u001B[31m"; // Red for moved piece
-
-        int height = papan.getHeight();
-        int width = papan.getWidth();
-
-        boolean isHorizontalExit = pintuKeluar.isHorizontal();
-        int exitRow = pintuKeluar.getRow();
-        int exitCol = pintuKeluar.getCol();
-
-        // Print top exit if it exists (exitRow == -1)
-        if (exitRow == -1) {
-            // Print top border with exit
-            for (int col = 0; col < width; col++) {
-                if (col == exitCol) {
-                    System.out.print(EXIT_COLOR + "K" + RESET);
-                } else {
-                    System.out.print(" ");
-                }
-            }
-            System.out.println();
-        }
-
-        // Print the board rows
-        for (int row = 0; row < height; row++) {
-            // Print left exit if it exists (exitCol == -1 and current row matches exitRow)
-            if (exitCol == -1 && row == exitRow) {
-                System.out.print(EXIT_COLOR + "K" + RESET);
-            } else if (exitCol == -1) {
-                System.out.print(" ");
-            }
-
-            // Print board content
-            for (int col = 0; col < width; col++) {
-                Piece piece = papan.getPiece(row, col);
-
-                if (piece != null) {
-                    String pieceId = piece.getId();
-
-                    if (pieceId.equals("P")) {
-                        System.out.print(PRIMARY_COLOR + pieceId + RESET);
-                    } else {
-                        System.out.print(pieceId);
-                    }
-                } else {
-                    System.out.print(".");
-                }
-            }
-
-            // Print right exit if it exists (exitCol == width and current row matches
-            // exitRow)
-            if (exitCol == width && row == exitRow) {
-                System.out.print(EXIT_COLOR + "K" + RESET);
-            }
-
-            System.out.println();
-        }
-
-        // Print bottom exit if it exists (exitRow == height)
-        if (exitRow == height) {
-            // Print bottom border with exit
-            for (int col = 0; col < width; col++) {
-                if (col == exitCol) {
-                    System.out.print(EXIT_COLOR + "K" + RESET);
-                } else {
-                    System.out.print(" ");
-                }
-            }
-            System.out.println();
-        }
-    }
 }
