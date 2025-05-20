@@ -29,7 +29,7 @@ public class OutputHandler {
         }
 
         System.out.println("Papan Awal");
-        printBoard(initialPapan, pintuKeluar);
+        printBoard(initialPapan, pintuKeluar, null);
         System.out.println();
 
         // Create a deep copy of the initial state
@@ -62,7 +62,7 @@ public class OutputHandler {
             }
 
             // Print the board state
-            printBoard(currentPapan, pintuKeluar);
+            printBoard(currentPapan, pintuKeluar, pieceId);
             System.out.println();
         }
 
@@ -186,10 +186,11 @@ public class OutputHandler {
     /**
      * Prints the board state with colored output for the primary piece, exit door,
      * and moved piece
+     * s
      * 
      * @param papan the board to print
      */
-    private void printBoard(Papan papan, PintuKeluar pintuKeluar) {
+    private void printBoard(Papan papan, PintuKeluar pintuKeluar, String movedPieceId) {
         // ANSI color codes
         final String RESET = "\u001B[0m";
         final String PRIMARY_COLOR = "\u001B[32m"; // Green for primary piece
@@ -234,6 +235,8 @@ public class OutputHandler {
 
                     if (pieceId.equals("P")) {
                         System.out.print(PRIMARY_COLOR + pieceId + RESET);
+                    } else if (movedPieceId != null && pieceId.equals(movedPieceId)) {
+                        System.out.print(MOVED_COLOR + pieceId + RESET);
                     } else {
                         System.out.print(pieceId);
                     }

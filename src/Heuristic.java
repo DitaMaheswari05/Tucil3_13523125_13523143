@@ -172,13 +172,10 @@ public class Heuristic {
                 if (piece.getId().equals("P") && pintuKeluar != null) {
                     PrimaryPiece tempPrimary = new PrimaryPiece();
                     for (Position pos : tempPiece.getPositions()) {
+                        logger.info("gerakan keluar dari papan: " + pos.getRow() + ", " + pos.getCol());
                         tempPrimary.addPosition(pos.getRow(), pos.getCol());
                     }
                     tempPrimary.determineOrientation();
-                    if (tempPrimary.canExitAt(pintuKeluar)) {
-                        logger.info("[DEBUG] Primary piece dapat keluar melalui pintu keluar.");
-                        return true;
-                    }
                 }
                 logger.warning("[DEBUG] Gerakan keluar dari papan tidak valid untuk piece selain primary.");
                 return false;
@@ -316,4 +313,5 @@ public class Heuristic {
     public void currentBoard() {
         papan.printPapan();
     }
+
 }
