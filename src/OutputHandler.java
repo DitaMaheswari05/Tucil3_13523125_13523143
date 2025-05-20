@@ -41,6 +41,8 @@ public class OutputHandler {
             currentPapan.addPiece(piece);
         }
 
+        boolean primaryPieceExited = false;
+
         // Execute each move and print the board state
         for (int i = 0; i < moveHistory.size(); i++) {
             Gerakan move = moveHistory.get(i);
@@ -56,9 +58,20 @@ public class OutputHandler {
             // Apply the move to the piece
             piece.move(move.getDirection());
 
+            // Check if primary piece has exited
+            if (pieceId.equals("P") && ((PrimaryPiece)piece).canExitAt(pintuKeluar)) {
+                primaryPieceExited = true;
+                // If primary piece exited, remove it from the current pieces
+                currentPapan.removePiece(piece);
+                currentPieces.remove("P");
+                System.out.println("Primary piece successfully exited!");
+            }
+
             // Place all pieces on the new board
             for (Piece p : currentPieces.values()) {
-                currentPapan.addPiece(p);
+                if (!(p instanceof PrimaryPiece) || !primaryPieceExited) {
+                    currentPapan.addPiece(p);
+                }
             }
 
             // Print the board state
