@@ -1,0 +1,8 @@
+6 6
+9
+ .AAA..
+ BBCD..
+ EECD..
+KFPPH..
+ FGGH..
+ FIII..

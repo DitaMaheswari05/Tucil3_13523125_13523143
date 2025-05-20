@@ -1,9 +1,5 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 import java.util.logging.Logger;
 
 public class InputHandler {
@@ -111,8 +107,40 @@ public class InputHandler {
         // Inisialisasi papan 2D
         char[][] board = new char[height][width];
 
+        boolean pintuKiri = false;
+        int pintuKiriRow = -1;
+
+        if (exitRow >= startIndex && exitRow < startIndex + height && exitCol == 0) {
+            pintuKiri = true;
+            pintuKiriRow = exitRow - startIndex;
+            for (int i = 0; i < height; i++) {
+                String rowLine = allLines.get(startIndex + i);
+                if (i == pintuKiriRow) {
+                    // Baris yang ada K di kolom 0 tidak boleh diawali spasi
+                    if (rowLine.charAt(0) == ' ') {
+                        throw new IllegalArgumentException("Baris pintu kiri (K) tidak boleh diawali spasi.");
+                    }
+                } else {
+                    // Baris lain harus diawali spasi
+                    if (rowLine.length() <= width || rowLine.charAt(0) != ' ') {
+                        throw new IllegalArgumentException(
+                                "Baris ke-" + (i + 1) + " harus diawali spasi jika pintu keluar di kiri.");
+                    }
+                }
+            }
+        }
+
         for (int i = 0; i < height; i++) {
             String rowLine = allLines.get(startIndex + i);
+            if (pintuKiri) {
+                if (i == pintuKiriRow && rowLine.charAt(0) == 'K') {
+                    // Baris pintu: abaikan K, ambil substring setelah K
+                    rowLine = rowLine.substring(1);
+                } else if (i != pintuKiriRow && rowLine.length() > width) {
+                    // Baris lain: abaikan spasi pertama
+                    rowLine = rowLine.substring(1);
+                }
+            }
             for (int j = 0; j < width; j++) {
                 board[i][j] = rowLine.charAt(j);
             }
@@ -137,7 +165,7 @@ public class InputHandler {
         } else {
             isHorizontal = true;
             // pintu keluar di samping kiri (-1) atau kanan (width)
-            if (exitCol < 0) {
+            if (exitCol == 0) {
                 exitCol = -1;
                 logger.info("Pintu keluar di kiri papan.");
             } else if (exitCol >= width) {
@@ -149,11 +177,60 @@ public class InputHandler {
         }
 
         pintuKeluar = new PintuKeluar(exitRow, exitCol, isHorizontal);
+        logger.info("Pintu keluar ditemukan di: " + pintuKeluar.getRow());
+        logger.info("Pintu keluar ditemukan di: " + pintuKeluar.getCol());
 
         // Simpan dan proses papan
         logger.info("Papan dimensi: " + height + " x " + width);
         papan = new Papan(width, height);
         processBoardConfiguration(board);
+
+        // Validasi jumlah piece (N) sesuai input, N tidak menghitung primary piece
+        int nonPrimaryCount = 0;
+        for (String id : pieces.keySet()) {
+            if (!id.equals("P")) {
+                nonPrimaryCount++;
+            }
+        }
+        if (nonPrimaryCount != numPieces) {
+            throw new IllegalArgumentException("Jumlah piece pada papan tidak sesuai dengan input.");
+        }
+
+        // Validasi: primary piece dan pintu keluar harus sesuai aturan orientasi dan
+        // baris/kolom
+        if (primaryPiece != null && pintuKeluar != null) {
+            if (primaryPiece.getOrientation() == Orientation.HORIZONTAL) {
+                if (!pintuKeluar.isHorizontal()) {
+                    throw new IllegalArgumentException("Primary piece horizontal, pintu keluar harus horizontal.");
+                }
+                boolean sameRow = false;
+                for (Position pos : primaryPiece.getPositions()) {
+                    if (pos.getRow() == pintuKeluar.getRow()) {
+                        sameRow = true;
+                        break;
+                    }
+                }
+                if (!sameRow) {
+                    throw new IllegalArgumentException(
+                            "Primary piece horizontal, pintu keluar harus di baris yang sama.");
+                }
+            } else if (primaryPiece.getOrientation() == Orientation.VERTICAL) {
+                if (pintuKeluar.isHorizontal()) {
+                    throw new IllegalArgumentException("Primary piece vertikal, pintu keluar harus vertikal.");
+                }
+                boolean sameCol = false;
+                for (Position pos : primaryPiece.getPositions()) {
+                    if (pos.getCol() == pintuKeluar.getCol()) {
+                        sameCol = true;
+                        break;
+                    }
+                }
+                if (!sameCol) {
+                    throw new IllegalArgumentException(
+                            "Primary piece vertikal, pintu keluar harus di kolom yang sama.");
+                }
+            }
+        }
 
         // Validasi primary piece dan pintu keluar
         if (primaryPiece != null && pintuKeluar != null) {
@@ -189,6 +266,8 @@ public class InputHandler {
                 }
             }
         }
+        printBoard(papan, pintuKeluar);
+
     }
 
     /**
@@ -198,6 +277,7 @@ public class InputHandler {
      */
     private void processBoardConfiguration(char[][] board) {
         processPieces(board);
+
         for (Piece piece : pieces.values()) {
             papan.addPiece(piece);
         }
@@ -210,14 +290,20 @@ public class InputHandler {
      */
     private void processPieces(char[][] board) {
         boolean[][] processed = new boolean[height][width];
+        HashSet<String> idSet = new HashSet<>();
 
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
+
                 if (processed[i][j] || board[i][j] == '.' || board[i][j] == 'K') {
                     continue;
                 }
 
                 String pieceId = String.valueOf(board[i][j]);
+                if (idSet.contains(pieceId)) {
+                    throw new IllegalArgumentException("Terdapat id piece yang sama: " + pieceId);
+                }
+                idSet.add(pieceId);
 
                 Piece piece;
                 if (pieceId.equals("P")) {
@@ -230,6 +316,7 @@ public class InputHandler {
                 identifyPieceCells(board, processed, piece, i, j, pieceId);
                 piece.determineOrientation();
                 pieces.put(pieceId, piece);
+                logger.info("Piece " + pieceId + " ditemukan di posisi: " + i + j);
             }
         }
     }
@@ -271,4 +358,79 @@ public class InputHandler {
         return papan;
     }
 
+    private void printBoard(Papan papan, PintuKeluar pintuKeluar) {
+        // ANSI color codes
+        final String RESET = "\u001B[0m";
+        final String PRIMARY_COLOR = "\u001B[32m"; // Green for primary piece
+        final String EXIT_COLOR = "\u001B[35m"; // Purple for exit door
+        final String MOVED_COLOR = "\u001B[31m"; // Red for moved piece
+
+        int height = papan.getHeight();
+        int width = papan.getWidth();
+
+        boolean isHorizontalExit = pintuKeluar.isHorizontal();
+        int exitRow = pintuKeluar.getRow();
+        int exitCol = pintuKeluar.getCol();
+
+        // Print top exit if it exists (exitRow == -1)
+        if (exitRow == -1) {
+            // Print top border with exit
+            for (int col = 0; col < width; col++) {
+                if (col == exitCol) {
+                    System.out.print(EXIT_COLOR + "K" + RESET);
+                } else {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+        }
+
+        // Print the board rows
+        for (int row = 0; row < height; row++) {
+            // Print left exit if it exists (exitCol == -1 and current row matches exitRow)
+            if (exitCol == -1 && row == exitRow) {
+                System.out.print(EXIT_COLOR + "K" + RESET);
+            } else if (exitCol == -1) {
+                System.out.print(" ");
+            }
+
+            // Print board content
+            for (int col = 0; col < width; col++) {
+                Piece piece = papan.getPiece(row, col);
+
+                if (piece != null) {
+                    String pieceId = piece.getId();
+
+                    if (pieceId.equals("P")) {
+                        System.out.print(PRIMARY_COLOR + pieceId + RESET);
+                    } else {
+                        System.out.print(pieceId);
+                    }
+                } else {
+                    System.out.print(".");
+                }
+            }
+
+            // Print right exit if it exists (exitCol == width and current row matches
+            // exitRow)
+            if (exitCol == width && row == exitRow) {
+                System.out.print(EXIT_COLOR + "K" + RESET);
+            }
+
+            System.out.println();
+        }
+
+        // Print bottom exit if it exists (exitRow == height)
+        if (exitRow == height) {
+            // Print bottom border with exit
+            for (int col = 0; col < width; col++) {
+                if (col == exitCol) {
+                    System.out.print(EXIT_COLOR + "K" + RESET);
+                } else {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+        }
+    }
 }
