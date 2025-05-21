@@ -14,12 +14,6 @@ public class InputHandler {
         pieces = new HashMap<>();
     }
 
-    /**
-     * Reads the puzzle configuration from a file
-     * 
-     * @param fileName the name of the file to read
-     * @throws IOException if there's an error reading the file
-     */
     public void readConfigFromFile(String fileName) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
 
@@ -42,20 +36,10 @@ public class InputHandler {
         reader.close();
 
         // Cari posisi K (pintu keluar)
-        // Bisa di luar papan (di baris sebelum papan, sesudah papan, atau di luar
-        // kolom)
         boolean foundK = false;
         int exitRow = -1, exitCol = -1;
         boolean isHorizontal = false;
 
-        // Misal papan dimulai di baris tertentu dalam allLines:
-        // Karena kita baca height baris papan, coba cari window baris mana yang jadi
-        // papan:
-        // Asumsi: papan ada di tengah allLines, bisa coba cari window height baris yang
-        // cocok (atau asumsi langsung di tengah)
-
-        // Sederhana: cari semua K di allLines, cari posisi dengan memperhitungkan papan
-        // di tengah:
         for (int i = 0; i < allLines.size(); i++) {
             String currLine = allLines.get(i);
             for (int j = 0; j < currLine.length(); j++) {
@@ -74,11 +58,6 @@ public class InputHandler {
             throw new IllegalArgumentException("Pintu keluar (K) tidak ditemukan di papan.");
         }
 
-        // Sekarang kita asumsikan papan berada di allLines dari baris tertentu
-        // Kita cari window baris di allLines yang ukurannya height dengan asumsi papan
-        // ada di tengah (atau coba cocokkan)
-        // Supaya mudah, coba papan dimulai di baris: startIndex = exitRow - height/2
-        // (asumsi pintu keluar di luar board)
         int startIndex = -1;
 
         // Coba cari startIndex agar allLines.subList(startIndex, startIndex + height)
@@ -143,15 +122,8 @@ public class InputHandler {
             }
         }
 
-        // Tentukan apakah pintu keluar horizontal atau vertical
-        // Jika exitRow < startIndex → pintu keluar di atas papan → horizontal
-        // Jika exitRow >= startIndex + height → pintu keluar di bawah papan →
-        // horizontal
-        // Jika exitRow di dalam range papan → pintu keluar di samping → vertical
         if (exitRow < startIndex || exitRow >= startIndex + height) {
             isHorizontal = false;
-            // Karena pintu di luar baris papan, exitRow relatif ke papan = -1 (atas) atau
-            // height (bawah)
             if (exitRow < startIndex) {
                 exitRow = -1; // atas
             } else {
@@ -262,11 +234,6 @@ public class InputHandler {
 
     }
 
-    /**
-     * Processes the board configuration to identify all pieces
-     * 
-     * @param board the board configuration as a 2D array of characters
-     */
     private void processBoardConfiguration(char[][] board) {
         processPieces(board);
 
@@ -275,11 +242,6 @@ public class InputHandler {
         }
     }
 
-    /**
-     * Identifies all pieces in the board configuration
-     * 
-     * @param board the board configuration
-     */
     private void processPieces(char[][] board) {
         boolean[][] processed = new boolean[height][width];
         HashSet<String> idSet = new HashSet<>();
@@ -348,61 +310,6 @@ public class InputHandler {
         }
     }
 
-    // // Fungsi untuk validasi kelebihan baris dan kolom
-    // private void checkBarisKolomValid(ArrayList<String> allLines, int startIndex,
-    // int height, int width,
-    // boolean pintuKiri, int pintuKiriRow) {
-    // if (startIndex < 0 || startIndex + height > allLines.size()) {
-    // throw new IllegalArgumentException("Window papan di file input tidak
-    // valid.");
-    // }
-    // int barisPapan = 0;
-    // for (int i = 0; i < allLines.size(); i++) {
-    // if (i >= startIndex && i < startIndex + height) {
-    // String rowLine = allLines.get(i);
-    // int effectiveLength = rowLine.length();
-
-    // // Handle pintu kiri
-    // if (pintuKiri) {
-    // if (i - startIndex == pintuKiriRow) {
-    // if (rowLine.length() == 0 || rowLine.charAt(0) != 'K') {
-    // throw new IllegalArgumentException("Baris pintu kiri harus diawali 'K'.");
-    // }
-    // effectiveLength = rowLine.length() - 1;
-    // } else {
-    // if (rowLine.length() == 0 || rowLine.charAt(0) != ' ') {
-    // throw new IllegalArgumentException("Baris non-pintu kiri harus diawali
-    // spasi.");
-    // }
-    // effectiveLength = rowLine.length() - 1;
-    // }
-    // } else {
-    // if (rowLine.length() > width && rowLine.charAt(rowLine.length() - 1) == 'K')
-    // {
-    // effectiveLength = rowLine.length() - 1;
-    // barisPapan++;
-    // } else if (rowLine.length() > 0 && rowLine.charAt(0) == 'K') {
-    // barisPapan++;
-    // }
-    // }
-
-    // if (effectiveLength < width) {
-    // throw new IllegalArgumentException(
-    // "Baris ke-" + (i - startIndex + 1) + " kurang dari lebar papan.");
-    // }
-    // if (effectiveLength > width) {
-    // throw new IllegalArgumentException("Baris ke-" + (i - startIndex + 1) + "
-    // melebihi lebar papan.");
-    // }
-
-    // }
-    // }
-
-    // if (barisPapan != height) {
-    // throw new IllegalArgumentException("Jumlah baris papan tidak sesuai dengan
-    // height pada input.");
-    // }
-    // }
 
     // Fungsi untuk validasi kelebihan baris dan kolom sebelum parsing papan
     private void checkBarisKolomValid(ArrayList<String> allLines, int startIndex, int height, int width,

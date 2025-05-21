@@ -15,9 +15,6 @@ public class OutputHandler {
         this.initialPapan = initialPapan;
     }
 
-    /**
-     * Prints the solution sequence to the console
-     */
     public void printSolution() {
         if (moveHistory.isEmpty()) {
             System.out.println("No solution found.");
@@ -78,12 +75,6 @@ public class OutputHandler {
         System.out.println("Solution found with " + moveHistory.size() + " moves.");
     }
 
-    /**
-     * Creates a deep copy of the pieces map
-     * 
-     * @param pieces the original pieces map
-     * @return a deep copy of the pieces map
-     */
     private Map<String, Piece> deepCopyPieces(Map<String, Piece> pieces) {
         Map<String, Piece> copy = new HashMap<>();
         for (String pieceId : pieces.keySet()) {
@@ -104,12 +95,6 @@ public class OutputHandler {
         return copy;
     }
 
-    /**
-     * Saves the solution sequence to a text file
-     * 
-     * @param filename the name of the file to save to
-     * @throws IOException if there's an error writing to the file
-     */
     public void saveSolutionToFile(String filename) throws IOException {
         if (moveHistory.isEmpty()) {
             try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
@@ -161,13 +146,7 @@ public class OutputHandler {
             System.out.println("Solution saved to file: " + filename);
         }
     }
-
-    /**
-     * Saves the board state to a file
-     * 
-     * @param writer the PrintWriter to write to
-     * @param papan  the board to save
-     */
+    
     private void saveBoardToFile(PrintWriter writer, Papan papan) {
         int height = papan.getHeight();
         int width = papan.getWidth();
@@ -192,13 +171,6 @@ public class OutputHandler {
         }
     }
 
-    /**
-     * Prints the board state with colored output for the primary piece, exit door,
-     * and moved piece
-     * s
-     * 
-     * @param papan the board to print
-     */
     private void printBoard(Papan papan, PintuKeluar pintuKeluar, String movedPieceId) {
         // ANSI color codes
         final String RESET = "\u001B[0m";

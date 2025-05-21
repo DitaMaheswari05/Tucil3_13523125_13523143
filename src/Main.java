@@ -73,10 +73,6 @@ public class Main {
                     GreedyBestFirstSearch gbfs = new GreedyBestFirstSearch(gbfsHeuristicType, initialState);
                     solution = gbfs.solve();
                     break;
-                default:
-                    System.out.println("Invalid choice. Using Uniform Cost Search as default.");
-                    UniformCostSearch defaultUcs = new UniformCostSearch(initialState);
-                    solution = defaultUcs.solve();
             }
             
             long endTime = System.currentTimeMillis();
